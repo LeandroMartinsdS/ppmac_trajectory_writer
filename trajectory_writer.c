@@ -1,6 +1,28 @@
-#include "ppmac_trajectory_writter_test.h"
-#include "../../Libraries/ppmac_tcp/ppmac_tcp.h"
-#include "../../Libraries/ppmac_ushm_buffer/ppmac_ushm_buffer.h"
+/*
+ * =============================================================================
+ * File        : trajectory_writer.c
+ * Author      : Leandro Martins dos Santos
+ * Created on  : 2025-05-01
+ * Last Update : 2025-11-06
+ * Version     : 1.0
+ * Description : Implements trajectory writing to shared memory buffers for
+ *               Power PMAC systems. Handles TCP socket communication.
+ *
+ * Dependencies:
+ *   - gplib.h (Delta Tau Power PMAC library)
+ *   - stdlib.h, errno.h, signal.h, string.h, netinet/in.h, sys/socket.h
+ *
+ * Compiler    : Power PMAC IDE (Visual Studio-based) or GCC (Linux)
+ * Target      : Power PMAC CPU (Linux/Xenomai RT kernel)
+ *
+ * License     : Apache-2.0
+ *
+ * =============================================================================
+ */
+
+#include "trajectory_writer.h"
+#include "../../Libraries/ppmac_tcp_server/tcp_server.h"
+#include "../../Libraries/ppmac_ushm_buffer/ushm_buffer.h"
 
 int main() {
 
@@ -9,13 +31,13 @@ int main() {
 	struct timespec sleeptime = {0};
 	sleeptime.tv_nsec = NANO_5MSEC;	// #defines NANO_1MSEC, NANO_5MSEC & NANO_10MSEC are defined
 
-  	#ifndef RUN_AS_RT_APP	
+  	#ifndef RUN_AS_RT_APP
 		//-----------------------------
 		// Runs as a NON RT Linux APP
 		//-----------------------------
 		param.__sched_priority = 0;
 		pthread_setschedparam(pthread_self(),  SCHED_OTHER, &param);
-  	#else 
+  	#else
 		//---------------------------------------------------------------
 		// Runs as a RT Linux APP with the same scheduling policy as the
 		// Background script PLCs
@@ -58,24 +80,24 @@ int main() {
         init_buffer(frame_types, array, &frame_bytesize, base_memory);
         //printf("Buffer initialized\n");
 
-        while (write_idx < frames_per_buffer) { // TODO : Fix - it doesn't satisfy the 
+        while (write_idx < frames_per_buffer) { // TODO : Fix - it doesn't satisfy the
                                                 // condition where the last file has less frames
             // if (frames_per_buffer == 0) {
             //     break;
             // }
 
-       
+
             // while (buffer_status != IDLE) { /*sleep*/};
-            
+
             // buffer_status = WRITING;
             socketStatus = HandleClient(clientSock, message, frame_bytesize);
-            
-            // TO DO: Improve this to jump columns in the middle(?); permit     
+
+            // TO DO: Improve this to jump columns in the middle(?); permit
 
 //            memcpy(&array[0]->d, message, frame_bytesize);
 //            update_buffer(frame_types, array,frame_bytesize);
             write_frame(frame_types, array, frame_bytesize, message);
-            
+
             write_idx++;
             traj_idx++;
 //            printf("Buffer[%d] - Buffer Points: %d; Total Points: %d\n", buffer_idx, write_idx, traj_idx);

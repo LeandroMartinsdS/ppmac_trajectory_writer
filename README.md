@@ -1,82 +1,37 @@
-# PPMAC Trajectory Writter Test
+# Power PMAC Trajectory Writer
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+## Overview
 
-## Table of Contents
+This module provides a C-based interface for writing and executing trajectory data to Power PMAC systems using user shared memory. It is designed to integrate seamlessly into Power PMAC projects and supports modular inclusion via Git submodules.
 
-- Introduction
-- Installation
-- Usage
-- Contributing
-- License
-- Acknowledgements
+It builds upon the following components:
 
-## Introduction
+* **ppmac_tcp_server** – Handles TCP communication between external clients and the Power PMAC system.
+* **ppmac_ushm_buffer** – Manages shared memory buffers for efficient data exchange between user-space and kernel-space.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
+Together, these modules enable robust and flexible trajectory control for motion systems powered by Power PMAC.
 
-## Installation
+## How to Use
 
-### Cloning the Repository
+### Adding into Power PMAC project
 
-To clone the repository along with its submodules, use the following command:
+Follow the steps below to add this module to your Power PMAC project:
 
-```sh
-git clone --recurse-submodules <repository-url>
-```
-
-If you have already cloned the repository without submodules, you can initialize and update them with:
-
-```sh
-git submodule update --init --recursive
-```
-
-## Adding into Power PMAC project
-
-1. Clone or add this repository as a submodule in the desired path under "C Language".
-1. It can be added to Background Programs or Libraries.
-1. In the Power PMAC IDE, right-click on the desired folder and select "Add a new...".
-1. Enter the name "ppmac_pr" when prompted - the same name as this repository.
-1. When asked if you want to overwrite the file, select "No".
-1. Right-click on the created folder, and select "Add" > "Existing item...".
-1. Select the source and header files.
-
-### Background Programs
-### Libraries
-
-### Dependencies
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-```sh
-# Example
-pip install -r requirements.txt
-```
-
-## Usage
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
-
-```sh
-# Example
-python main.py
-```
-
-## Contributing
-
-If you would like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature-branch`).
-6. Open a pull request.
+1. Clone or add this repository as a submodule in the desired path under **C Language**.
+1. Add `ppmac_tcp_server` and `ppmac_ushm_buffer` on the *Libraries* folder, following the instructions present in each repository
+1. Add the main program
+    - In the Power PMAC IDE, right-click on the *Background Programs* folder and select **"Add a new..."**.
+    - Enter the name `ppmac_trajectory_writer` — the same name as this repository.
+    - When prompted to overwrite the file, select **"No"**.
+    - Right-click on the created folder and select **"Add" > "Existing item..."**.
+    - Select the source (`ppmac_trajectory_writer.c`) and header (`ppmac_trajectory_writer.h`) files from this repository.
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
+This project is licensed under the Apache 2.0 License. See the LICENSE file for details.
 
-## Acknowledgements
+## Author
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.
+[Leandro Martins dos Santos](https://github.com/LeandroMartinsdS)<br>
+Software Systems Engineer<br>
+Diamond Light Source Ltd.<br>

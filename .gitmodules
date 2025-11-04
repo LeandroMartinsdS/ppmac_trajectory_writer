@@ -1,9 +1,0 @@
-[submodule "Libraries/ppmac_tcp"]
-	path = Libraries/ppmac_tcp
-	url = git@github.com:LeandroMartinsdS/ppmac_tcp.git
-[submodule "Libraries/ppmac_ushm_buffer"]
-	path = Libraries/ppmac_ushm_buffer
-	url = git@github.com:LeandroMartinsdS/ppmac_ushm_buffer.git
-[submodule "Libraries/ppmac_rt_trajectory"]
-	path = Libraries/ppmac_rt_trajectory
-	url = git@github.com:LeandroMartinsdS/ppmac_rt_trajectory.git
